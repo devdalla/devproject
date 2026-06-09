@@ -37,7 +37,7 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   });
 }
 
-export default async function fetchHandler(request: Request, env: unknown, ctx: unknown) {
+async function fetchHandler(request: Request, env: unknown, ctx: unknown) {
   try {
     const handler = await getServerEntry();
     const response = await handler.fetch(request, env, ctx);
@@ -50,3 +50,7 @@ export default async function fetchHandler(request: Request, env: unknown, ctx: 
     });
   }
 }
+
+// Support both Nitro (expects a function) and Vite dev server (expects an object with a fetch method)
+fetchHandler.fetch = fetchHandler;
+export default fetchHandler;
