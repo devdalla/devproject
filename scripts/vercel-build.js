@@ -69,7 +69,7 @@ if (fs.existsSync(path.join(distDir, "server"))) {
   cpDir(path.join(distDir, "server"), funcDir);
   const vcConfig = {
     runtime: "nodejs20.x",
-    handler: "server.js",
+    handler: "index.mjs",
     launcherType: "Nodejs"
   };
   fs.writeFileSync(path.join(funcDir, ".vc-config.json"), JSON.stringify(vcConfig, null, 2));
